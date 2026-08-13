@@ -1,18 +1,20 @@
 """
 BFGS implementation
 
-This module provides an implementation of the gradient descent algorithm.
+This module provides an implementation of the BFGS algorithm.
 
 Author: Jonas Lucka
 Date: 2026
-
 """
 
 import numpy as np
 
-def BFGS(f, grad_f, x0, H0=None, tol=1e-5, max_it=1000):
+from line_search import wolfe_line_search
+
+
+def bfgs(f, grad_f, x0, H0=None, tol=1e-5, max_it=1000):
     """
-    BFGS method which is based on Nocedal and Wright: Numerical Optimization
+    BFGS method which is based on Algorithm 6.1 Nocedal and Wright: Numerical Optimization
 
     Parameters
     ----------
@@ -32,7 +34,7 @@ def BFGS(f, grad_f, x0, H0=None, tol=1e-5, max_it=1000):
     tol : float, optional
         Convergence tolerance.
 
-    max_iter : int, optional
+    max_it : int, optional
         Maximum number of iterations.
 
 
@@ -40,21 +42,31 @@ def BFGS(f, grad_f, x0, H0=None, tol=1e-5, max_it=1000):
     -------
     x : ndarray
         Approximate minimizer.
+
+
+    Raises
+    ------
+    RuntimeError
+        If no acceptable step length is found within max_it iterations.
     """
 
     x = x0
     grad = grad_f(x)
     k = 0
 
+    # Check if H0 is given
     if H0 is None:
         H = np.eye(len(x))
     else:
         H = H0
 
     while np.linalg.norm(grad) > tol and k < max_it:
+
+        # Calculation of descent direction p and take a step with stepsize alpha
         p = -H @ grad
         alpha = wolfe_line_search(f, grad_f, x, p)
         x_new = x + alpha * p
+
         grad_new = grad_f(x_new)
         s = x_new - x
         y = grad_new - grad
@@ -73,5 +85,12 @@ def BFGS(f, grad_f, x0, H0=None, tol=1e-5, max_it=1000):
         x = x_new
         grad = grad_new
         k += 1
-    return x
-    
+
+    # Check why the algorithm stopped
+    if np.linalg.norm(grad) <= tol:
+        return x
+
+    raise RuntimeError(
+        "BFGS failed to converge within the maximum "
+        "number of iterations."
+    )
