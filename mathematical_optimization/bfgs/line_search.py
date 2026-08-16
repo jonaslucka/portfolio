@@ -13,7 +13,7 @@ def zoom(f, grad_f, x, p, alpha_lo, alpha_hi, c1=1e-4, c2=0.9, max_it=50):
     """
     Zoom phase of the strong Wolfe line search.
 
-    Implements Algorithm 3.6 from Nocedal and Wright: Numerical Optimization
+    Implements Algorithm 3.6 from Nocedal and Wright: Numerical Optimization 2nd edition
 
     This function searches for a step length alpha_star in the
     interval [alpha_lo, alpha_hi].
@@ -103,7 +103,7 @@ def wolfe_line_search(f, grad_f, x, p, alpha_max=10.0, alpha_1=1.0, c1=1e-4, c2=
     """
     Line search satisfying the strong Wolfe conditions.
 
-    Implements Algorithm 3.5 from Nocedal and Wright: Numerical Optimization.
+    Implements Algorithm 3.5 from Nocedal and Wright: Numerical Optimization 2nd edition
 
     Parameters
     ----------
