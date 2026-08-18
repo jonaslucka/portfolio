@@ -9,10 +9,10 @@ Date: 2026
 
 import numpy as np
 
-from line_search import wolfe_line_search
+from ..line_search import wolfe_line_search
 
 
-def bfgs(f, grad_f, x0, H0=None, tol=1e-5, max_it=1000):
+def optimize_bfgs(f, grad_f, x0, H0=None, tol=1e-5, max_it=1000):
     """
     BFGS method which is based on Algorithm 6.1 in
     Nocedal and Wright: Numerical Optimization 2nd edition
