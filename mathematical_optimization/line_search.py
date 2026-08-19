@@ -9,7 +9,7 @@ Author: Jonas Lucka
 Date: 2026
 """
 
-def zoom(f, grad_f, x, p, alpha_lo, alpha_hi, c1=1e-4, c2=0.9, max_it=50):
+def zoom(f, grad_f, x, p, alpha_lo, alpha_hi, c1=1e-5, c2=0.9, max_it=100):
     """
     Zoom phase of the strong Wolfe line search.
 
@@ -99,7 +99,7 @@ def zoom(f, grad_f, x, p, alpha_lo, alpha_hi, c1=1e-4, c2=0.9, max_it=50):
     )
 
 
-def wolfe_line_search(f, grad_f, x, p, alpha_max=10.0, alpha_1=1.0, c1=1e-4, c2=0.9, max_it=50):
+def wolfe_line_search(f, grad_f, x, p, alpha_max=10.0, alpha_1=1.0, c1=1e-5, c2=0.9, max_it=100):
     """
     Line search satisfying the strong Wolfe conditions.
 
