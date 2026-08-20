@@ -93,7 +93,7 @@ def two_loop_recursion(grad_fk, s_history, y_history):
     return r
 
 
-def optimize_lbfgs(f, grad_f, x0, m=10, tol=1e-5, max_it=100, return_history=False):
+def optimize_lbfgs(f, grad_f, x0, m=10, tol=1e-5, max_it=100, return_history=False, alpha_max=250):
     """
     L-BFGS method which is based on Algorithm 7.5 in
     Nocedal and Wright: Numerical Optimization 2nd edition
@@ -122,7 +122,10 @@ def optimize_lbfgs(f, grad_f, x0, m=10, tol=1e-5, max_it=100, return_history=Fal
     return_history: bool, optional
         If True, return the sequence of iterates in addition to the
         approximate minimizer.
-        If False, only the approximate minimizer is returned. 
+        If False, only the approximate minimizer is returned.
+
+    max_alpha : float, optional
+        Maximum allowed step length for the line search.
 
 
     Returns
@@ -159,7 +162,7 @@ def optimize_lbfgs(f, grad_f, x0, m=10, tol=1e-5, max_it=100, return_history=Fal
         d = -two_loop_recursion(g, s_hist, y_hist)
 
         # Strong Wolfe line search
-        alpha = wolfe_line_search(f, grad_f, x, d)
+        alpha = wolfe_line_search(f, grad_f, x, d, alpha_max=alpha_max)
 
         # Update everything
         x_new = x + alpha * d
