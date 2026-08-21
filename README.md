@@ -3,26 +3,27 @@ A portfolio of projects involving Python, SQL, optimization methods and machine 
 
 ## Project Structure
 
+```text
 portfolio/
 │
 ├── optimization/
 │   ├── bfgs/
-│   │   ├── bfgs.py
+│   │   ├── bfgs_algorithm.py
 │   │   └── test_bfgs.py
 │   │
 │   ├── lbfgs/
-│   │   ├── lbfgs.py
-│   │   └── test_lbfgs.py
+│   │   ├── l_bfgs_algorithm.py
+│   │   └── test_l_bfgs.py
 │   │
 │   └── sgd/
-│       ├── minibatch_sgd.py
-│       └── test_sgd.py
+│       ├── minibatch_sgd_algorithm.py
+│       └── test_minibatch_sgd.py
 │
 ├── machine_learning/
 │   └── linear_regression/
-│ 
 │
 └── sql/
+```
 
 Each Python package contains an __init__.py file where appropriate.
 

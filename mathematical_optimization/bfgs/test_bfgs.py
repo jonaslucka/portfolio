@@ -62,7 +62,7 @@ def test_bfgs_rosenbrock():
 
     x = optimize_bfgs(f, grad_f, x0)
 
-    assert np.allclose(x, np.array([1.0, 1.0]), atol=1e-4)
+    assert np.allclose(x, np.array([1.0, 1.0]), atol=1e-5)
 
 
 def test_bfgs_reduces_function_value():

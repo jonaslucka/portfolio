@@ -62,7 +62,7 @@ def test_lbfgs_rosenbrock():
 
     x = optimize_lbfgs(f, grad_f, x0, alpha_max=250)
 
-    assert np.allclose(x, np.array([1.0, 1.0]), atol=1e-4)
+    assert np.allclose(x, np.array([1.0, 1.0]), atol=1e-5)
 
 
 def test_lbfgs_reduces_function_value():
