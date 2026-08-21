@@ -126,17 +126,19 @@ def test_two_loop_recursion_empty_history():
 
     grad = np.array([1.0, 2.0, 3.0])
 
-    result = two_loop_recursion(
-        grad,
-        [],
-        []
-    )
+    result = two_loop_recursion(grad, [], [])
 
     assert np.allclose(result, grad)
 
 def test_lbfgs_with_one_memory_pair():
     """
     L-BFGS should converge when only one correction pair is stored.
+
+    f(x) = (x1 - 1)^2 + 2*(x2 + 2)^2
+
+    The initial point is x_0 = (5, 5).
+    
+    The minimum is at x = (1, -2).
     """
 
     def f(x):
@@ -157,6 +159,16 @@ def test_lbfgs_with_one_memory_pair():
 def test_lbfgs_high_dimensional_quadratic():
     """
     L-BFGS should solve a higher-dimensional quadratic problem.
+
+    The objective function is
+
+        f(x) = 1/2 * sum_{i=1}^n i * (x_i - 1)^2,
+
+    where n = 100.
+
+    The initial point is x_0 = (0, ..., 0).
+
+    The minimum is at x = (1, ..., 1).
     """
 
     n = 100
@@ -179,6 +191,12 @@ def test_lbfgs_high_dimensional_quadratic():
 def test_lbfgs_return_history():
     """
     L-BFGS should optionally return the optimization history.
+
+    f(x) = (x1 - 1)^2 + (x2 + 2)^2
+
+    The initial point is x_0 = (5, 5).
+
+    The minimum is at x = (1, -2).
     """
 
     def f(x):
@@ -192,12 +210,7 @@ def test_lbfgs_return_history():
 
     x0 = np.array([5.0, 5.0])
 
-    x, history = optimize_lbfgs(
-        f,
-        grad_f,
-        x0,
-        return_history=True
-    )
+    x, history = optimize_lbfgs(f, grad_f, x0, return_history=True)
 
     assert np.allclose(x, np.array([1.0, -2.0]), atol=1e-5)
     assert isinstance(history, list)
