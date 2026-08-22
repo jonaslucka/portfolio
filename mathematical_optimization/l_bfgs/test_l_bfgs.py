@@ -47,6 +47,9 @@ def test_lbfgs_rosenbrock():
     The initial point is x_0 = (-1.2, 1)
 
     The minimum is at x = (1, 1).
+
+    The chosen initial point and line-search configuration
+    make a larger alpha_max useful for this test
     """
 
     def f(x):
