@@ -71,7 +71,8 @@ def optimize_minibatch_sgd(
 
     Raises
     ------
-
+    ValueError
+        If the input parameters are invalid 
     """
     if batch_size <= 0:
         raise ValueError("batch_size must be greater than 0.")

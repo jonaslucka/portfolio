@@ -49,10 +49,10 @@ def optimize_bfgs(f, grad_f, x0, H0=None, tol=1e-5, max_it=100):
     Raises
     ------
     RuntimeError
-        If no acceptable step length is found within max_it iterations.
+        If BFGS did not converge within max_it iterations.
     """
 
-    x = x0
+    x = np.asarray(x0, dtype=float)
     grad = grad_f(x)
     k = 0
 
@@ -93,6 +93,6 @@ def optimize_bfgs(f, grad_f, x0, H0=None, tol=1e-5, max_it=100):
         return x
 
     raise RuntimeError(
-        "BFGS failed to converge within the maximum "
-        "number of iterations."
+        "BFGS failed to converge within "
+        f"max_it={max_it} iterations."
     )

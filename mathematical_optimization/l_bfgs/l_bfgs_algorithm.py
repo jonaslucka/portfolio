@@ -93,7 +93,7 @@ def two_loop_recursion(grad_fk, s_history, y_history):
     return r
 
 
-def optimize_lbfgs(f, grad_f, x0, m=10, tol=1e-5, max_it=100, return_history=False, alpha_max=250):
+def optimize_lbfgs(f, grad_f, x0, m=10, alpha_max=250, tol=1e-5, max_it=100, return_history=False):
     """
     L-BFGS method which is based on Algorithm 7.5 in
     Nocedal and Wright: Numerical Optimization 2nd edition
@@ -113,6 +113,9 @@ def optimize_lbfgs(f, grad_f, x0, m=10, tol=1e-5, max_it=100, return_history=Fal
     m : int, optional
         Maximum number of correction pairs (s_i, y_i) stored in memory.
 
+    max_alpha : float, optional
+        Maximum allowed step length for the line search.
+
     tol : float, optional
         Convergence tolerance.
     
@@ -123,10 +126,6 @@ def optimize_lbfgs(f, grad_f, x0, m=10, tol=1e-5, max_it=100, return_history=Fal
         If True, return the sequence of iterates in addition to the
         approximate minimizer.
         If False, only the approximate minimizer is returned.
-
-    max_alpha : float, optional
-        Maximum allowed step length for the line search.
-
 
     Returns
     -------
@@ -140,10 +139,15 @@ def optimize_lbfgs(f, grad_f, x0, m=10, tol=1e-5, max_it=100, return_history=Fal
 
     Raises
     ------
+    ValueError
+        If the input parameters are invalid.
+
     RuntimeError
         If the algorithm reaches max_iter iterations without satisfying
         the convergence criterion.
     """
+    if m <= 0:
+        raise ValueError("m must be greater than 0.")
 
     x = np.asarray(x0, dtype=float)
     g = grad_f(x)
@@ -183,7 +187,7 @@ def optimize_lbfgs(f, grad_f, x0, m=10, tol=1e-5, max_it=100, return_history=Fal
     else:
         raise RuntimeError(
             "L-BFGS failed to converge within "
-            f"max_iter={max_it} iterations."
+            f"max_it={max_it} iterations."
         )
 
     if return_history:

@@ -3,7 +3,6 @@ Line Search implementation
 
 This module provides an implementation of a line search algorithm
 which fullfills the wolfe conditions.
-This algorithm is based on Nocedal and Wright: Numerical Optimization
 
 Author: Jonas Lucka
 Date: 2026
@@ -57,9 +56,17 @@ def zoom(f, grad_f, x, p, alpha_lo, alpha_hi, c1=1e-5, c2=0.9, max_it=100):
 
     Raises
     ------
+    ValueError
+        If input parameters are invalid.
+
     RuntimeError
         If no acceptable step length is found within max_iter iterations.
     """
+    # Check if alpha_lo and alpha_hi fullfills their assumptions
+    if alpha_lo >= alpha_hi:
+        raise ValueError(
+            "alpha_lo and alpha_hi must satisfy alpha_lo < alpha_hi."
+            )
 
     phi_0 = f(x)
     grad_0 = grad_f(x)
@@ -95,7 +102,8 @@ def zoom(f, grad_f, x, p, alpha_lo, alpha_hi, c1=1e-5, c2=0.9, max_it=100):
 
     raise RuntimeError(
         "Zoom failed to find a step length satisfying "
-        "the strong Wolfe conditions."
+        "the strong Wolfe conditions within"
+        f"max_it={max_it} iterations."
     )
 
 
@@ -145,7 +153,7 @@ def wolfe_line_search(f, grad_f, x, p, alpha_max=10.0, alpha_1=1.0, c1=1e-5, c2=
     Raises
     ------
     ValueError
-        If the parameters are invalid or p is not a descent direction.
+        If the input parameters are invalid or p is not a descent direction.
 
     RuntimeError
         If no acceptable step length is found within max_it iterations.
@@ -194,7 +202,7 @@ def wolfe_line_search(f, grad_f, x, p, alpha_max=10.0, alpha_1=1.0, c1=1e-5, c2=
             return alpha
 
         if dphi >= 0:
-            return zoom(f, grad_f, x, p, alpha, alpha_0, c1=c1, c2=c2, max_it=max_it)
+            return zoom(f, grad_f, x, p, alpha_0, alpha, c1=c1, c2=c2, max_it=max_it)
 
         # Choose alpha_next in the intervall (alpha_i, alpha_max)
         alpha_next = min(2.0 * alpha, alpha_max)
@@ -206,5 +214,6 @@ def wolfe_line_search(f, grad_f, x, p, alpha_max=10.0, alpha_1=1.0, c1=1e-5, c2=
 
     raise RuntimeError(
         "Wolfe line search failed to find a step length "
-        "satisfying the strong Wolfe conditions."
+        "satisfying the strong Wolfe conditions within"
+        f"max_it={max_it} iterations."
     )
