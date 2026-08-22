@@ -50,27 +50,3 @@ Each algorithm has an associated pytest test module.
 | Minibatch SGD | Gradient | O(n) |
 
 Here, `n` is the number of optimization parameters and `m` is the number of stored correction pairs in L-BFGS.
-
-## Project Structure
-
-```text
-mathematical_optimization/
-│
-├── bfgs/
-│   ├── bfgs_algorithm.py
-|   ├── test_bfgs.py
-│   └── README.md
-│
-├── lbfgs/
-│   ├── l_bfgs_algorithm.py
-|   ├── test_l_bfgs.py
-│   └── README.md
-│
-|
-├── sgd/
-│   ├── minibatch_sgd_algorithm.py
-|   ├── test_sgd.py
-│   └── README.md
-|
-├── line_search.py
-└── README.md
