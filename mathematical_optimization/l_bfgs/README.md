@@ -137,7 +137,12 @@ $$
 x_{k+1} = x_k + \alpha_k p_k.
 $$
 
-6. Compute$$s_k = x_{k+1} - x_k$$
+6. Compute
+
+$$
+s_k = x_{k+1} - x_k
+$$
+
 and
 
 $$
@@ -188,12 +193,15 @@ two_loop_recursion(grad_fk, s_history, y_history)
 
 ## Computational Cost and Properties
 
-L-BFGS avoids the $O(n^2)$ storage which is required in the BFGS algorithm.
+L-BFGS avoids the $$O(n^2)$$ storage which is required in the BFGS algorithm.
 
-With $m$ stored correction pairs:
+With $m$ stored correction pairs the memory is
 
-Memory: $O(mn)$
-Two-loop recursion: $O(mn)$ per iteration
+$$
+O(mn).
+$$
+
+And the two-loop recursion has $$O(mn)$$ per iteration
 
 With $m=10$ the computational and memory requirements scale approximately linearly for big numbers of variables.
 

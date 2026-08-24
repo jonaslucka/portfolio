@@ -112,9 +112,9 @@ The function returns the minimizer.
 ## Computational Cost and Properties
 
 BFGS stores the full inverse Hessian approximation $H_k$, which is an $n \times n$ matrix.
-The storage requirement is therefore $O(n^2).$
+The storage requirement is therefore $$O(n^2).$$
 
-The matrix updates require $ O(n^2) $ arihtmetic operations per iteraion, in addition to the cost of evaluating the objective function, evaluating the gradient and the cost of the line search.
+The matrix updates require $$O(n^2)$$ arihtmetic operations per iteraion, in addition to the cost of evaluating the objective function, evaluating the gradient and the cost of the line search.
 
 Further the algorithms rate of convergence is superlinear and the algorithm is generally robust.
 

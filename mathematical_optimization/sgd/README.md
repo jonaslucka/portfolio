@@ -14,36 +14,18 @@ This implementation is written from scratch using NumPy and does not depend on f
 
 Consider an objective function $L$ that is defined as the average loss over a dataset containing $n$ samples:
 
-$$
-L(\theta)
-=
-\frac{1}{n}
-\sum_{i=1}^{n}
-\ell(\theta; x_i, y_i),
-$$
+$$L(\theta)=\frac{1}{n}\sum_{i=1}^{n}\ell(\theta; x_i, y_i),$$
 
 where $\theta$ is the parameter vector and $\ell$ is the loss for an
 individual training example.
 
 The gradient is
 
-$$
-\nabla L(\theta)
-=
-\frac{1}{n}
-\sum_{i=1}^{n}
-\nabla_\theta \ell(\theta; x_i,y_i).
-$$
+$$\nabla L(\theta)=\frac{1}{n}\sum_{i=1}^{n}\nabla_\theta \ell(\theta; x_i,y_i).$$
 
 Fullbatch gradient descent updates the parameters according to
 
-$$
-\theta_{k+1}
-=
-\theta_k
--
-\eta \nabla L(\theta_k),
-$$
+$$\theta_{k+1}=\theta_k-\eta \nabla L(\theta_k),$$
 
 where $\eta > 0$ is the learning rate.
 
@@ -51,36 +33,19 @@ Stochastic gradient descent estimates the gradient using a subset of the trainin
 
 For a minibatch $B_k$ containing $b$ samples, the minibatch gradient is
 
-$$
-g_k
-=
-\frac{1}{b}
-\sum_{i \in B_k}
-\nabla_\theta \ell(\theta_k;x_i,y_i).
-$$
+$$g_k=\frac{1}{b}\sum_{i \in B_k}\nabla_\theta \ell(\theta_k;x_i,y_i).$$
 
 The parameter update then becomes
 
-$$
-\theta_{k+1}
-=
-\theta_k
--
-\eta g_k.
-$$
+$$\theta_{k+1}=\theta_k-\eta g_k.$$
 
 The minibatch gradient is an unbiased estimator of the full gradient when the minibatch is sampled uniformly from the training set. 
 
-Then each training example has probability $\frac{b}{n}$ of being included in the minibatch:
-$$
-\mathbb{E}[g_k]
-= 
-\frac{1}{b}\sum^n_{i=1}\frac{b}{n}\nabla_\theta \ell(\theta_k;x_i,y_i) 
-= 
-\frac{1}{n}\sum^n_{i=1}\nabla_\theta \ell(\theta_k;x_i,y_i)
-=
-\nabla L(\theta_k).
-$$
+Then each training example has probability
+$\frac{b}{n}$
+of being included in the minibatch:
+
+$$\mathbb{E}[g_k]= \frac{1}{b}\sum^n_{i=1}\frac{b}{n}\nabla_\theta \ell(\theta_k;x_i,y_i) = \frac{1}{n}\sum^n_{i=1}\nabla_\theta \ell(\theta_k;x_i,y_i)=\nabla L(\theta_k).$$
 
 The minibatch gradient generally differs from the full gradient for an individual update, but it has the correct expectation under uniform sampling.
 
@@ -99,7 +64,8 @@ For each epoch:
 1. Shuffle the training data.
 2. Split the shuffled data into minibatches $B$.
 3. Compute the gradient of the loss on each minibatch.
-4. Update the parameters:$$\theta_{k+1}=\theta_k-\eta \nabla L_B(\theta_k),$$
+4. Update the parameters:
+$$\theta_{k+1}=\theta_k-\eta \nabla L_B(\theta_k),$$
 where
 $\nabla L_B(\theta_k)$ is the gradient estimated using the minibatch B.
 
