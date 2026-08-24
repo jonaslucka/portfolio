@@ -137,27 +137,18 @@ $$
 x_{k+1} = x_k + \alpha_k p_k.
 $$
 
-6. Compute
-
-$$
-s_k = x_{k+1} - x_k
-$$
-
+6. Compute$$s_k = x_{k+1} - x_k$$
 and
 
 $$
 y_k = \nabla f(x_{k+1}) - \nabla f(x_k)
 $$
 
-7. If the curvature condition 
+7. If the curvature condition $$s_k^T y_k > 0$$
 
-$$
-s_k^T y_k > 0
-$$
+   is satisfied, store the pair $(s_k, y_k)$.
 
-is satisfied, store the pair $(s_k, y_k)$.
-
-8. If more than $m$ correction pairs are stored, discard teh oldest pair.
+8. If more than $m$ correction pairs are stored, discard the oldest pair.
 
 9. Repeat until convergence.
 

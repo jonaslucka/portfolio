@@ -43,10 +43,14 @@ Each algorithm has an associated pytest test module.
 
 ## Comparison
 
-| Algortihm | Derivatives | Memory
+| Algortihm | Derivatives | Computational Cost
 |---|---|---|
-| BFGS | Gradient | O(n^2)
-| L-BFGS | Gradient | O(mn) |
-| Minibatch SGD | Gradient | O(n) |
+| BFGS | Gradient | $O(n^2)$
+| L-BFGS | Gradient | $O(mn)$ |
+| Minibatch SGD | Gradient | $O(bn)$ |
 
-Here, `n` is the number of optimization parameters and `m` is the number of stored correction pairs in L-BFGS.
+where:
+
+- n is the number of optimization parameters
+- m is the number of stored L-BFGS correction pairs
+- b is the minibatch size
