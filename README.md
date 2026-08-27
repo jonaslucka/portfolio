@@ -20,7 +20,7 @@ portfolio/
 │       └── test_minibatch_sgd.py
 │
 ├── machine_learning/
-│   └── linear_regression/
+│   └── linear_regression.py
 │
 └── sql/
 ```
@@ -36,3 +36,5 @@ Each Python package contains an __init__.py file where appropriate.
 - Raschka, S. *How is stochastic gradient descent implemented
   in the context of machine learning and deep learning?*
   https://sebastianraschka.com/faq/docs/sgd-methods.html
+
+- Zhang, A., & Lipton, Z. C., & Li M. and Smola A. J. (2023) *Dive into Deep Learning*. Cambridge University Press. https://D2L.ai
