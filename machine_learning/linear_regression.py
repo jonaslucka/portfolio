@@ -13,13 +13,13 @@ import numpy as np
 class LinearRegression:
     """
     Represents a linear regresion model and allows for fitting and prediction. 
-    This class and class methods are based on Chapter 3.4 in: 
+    This class and methods are based on Chapter 3.4 in: 
     
         Dive into Deep Learning from Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola 
 
     The model predicts: y_hat = x @ w + b 
 
-    where w is the vector of feature weights and b is the bias. 
+    where w is the vector weights and b is the bias. 
 
     
     Parameters
@@ -33,7 +33,7 @@ class LinearRegression:
         Parameter vector containing the feature weights followed by the bias.
         Has the shape: n_features + 1 after fitting. 
 
-    n_features : int or None
+    num_features : int or None
         Number of features of the input data. 
 
     loss_history : ndarray or list or None 
@@ -41,7 +41,7 @@ class LinearRegression:
     """
     def __init__(self):
         self.params = None
-        self.n_features = None
+        self.num_features = None
         self.loss_history = None
 
     def loss(self, params, x, y):
@@ -138,10 +138,10 @@ class LinearRegression:
             Step size used by the optimizer when updating the parameters.
 
         epochs : int, default=100
-            Number of times the optimizer iterates over the training data.
+            Number of complete passes through the training dataset.
 
         batch_size : int, default=32
-            Number of samples used in each minibatch during optimization.
+            Number of samples used to compute each gradient update.
 
         Returns
         -------
@@ -163,9 +163,9 @@ class LinearRegression:
         if len(x) != len(y):
             raise ValueError("x and y must contain the same number of samples")
 
-        self.n_features = x.shape[1]
+        self.num_features = x.shape[1]
 
-        initial_params = np.zeros(self.n_features + 1)
+        initial_params = np.zeros(self.num_features + 1)
 
         result = optimizer(
             x=x,
