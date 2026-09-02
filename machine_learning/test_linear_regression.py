@@ -83,7 +83,7 @@ class TestLinearRegression:
 
     def test_fit_learns_simple_linear_relationship(self):
         """
-        The method fit should find the right parameter for a simple model.
+        The method fit should find the right parameter for a simple linear relationship.
 
         The training data follows the relationship y = 3x + 2.
         The weight is w = 3
@@ -111,7 +111,7 @@ class TestLinearRegression:
 
         The training data follows the relationship y = 2*x1 - 3*x2 + 5.
         The weights are w = (2, -3)
-        THe bias is b = 5.
+        The bias is b = 5.
         """
         model = LinearRegression()
 
@@ -170,12 +170,13 @@ class TestLinearRegression:
             y,
             optimizer=optimize_minibatch_sgd,
             learning_rate=0.01,
-            epochs=100,
+            epochs=10,
             batch_size=2
         )
 
         assert model.loss_history is not None
         assert len(model.loss_history) > 0
+        assert np.isfinite(model.loss_history).all()
 
     def test_fit_invalid_x_dimension(self):
         """
