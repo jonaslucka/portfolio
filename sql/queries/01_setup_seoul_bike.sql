@@ -7,11 +7,9 @@ Date: 2026
 */
 
 -- Create Database --
-
 CREATE DATABASE seoul_bike;
 
 -- Create the bike_rentals table -- 
-
 CREATE TABLE bike_rentals (
     date DATE,
     rented_bike_count INTEGER,
@@ -35,10 +33,8 @@ CREATE TABLE bike_rentals (
 SET datestyle = 'DMY';
 
 --  Import the CSV data --
-
 \copy bike_rentals FROM 'portfolio\sql\data\SeoulBikeData.csv/SeoulBikeData.csv' WITH (FORMAT csv, HEADER true);
 
 --  Verify the number of rows --
 -- Expected result: 8760 --
-
 SELECT COUNT(*) FROM bike_rentals;
