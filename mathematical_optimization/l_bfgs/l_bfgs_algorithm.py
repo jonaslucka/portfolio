@@ -110,19 +110,19 @@ def optimize_lbfgs(f, grad_f, x0, m=10, alpha_max=250, tol=1e-5, max_it=100, ret
     x0 : array_like
         Starting point.
 
-    m : int, optional
+    m : int, default=10
         Maximum number of correction pairs (s_i, y_i) stored in memory.
 
-    max_alpha : float, optional
+    alpha_max : float, default=250
         Maximum allowed step length for the line search.
 
-    tol : float, optional
+    tol : float, default=1e-5
         Convergence tolerance.
     
-    max_it : int, optional
+    max_it : int, default=100
         Maximum number of iterations.
 
-    return_history: bool, optional
+    return_history: bool, default=False
         If True, return the sequence of iterates in addition to the
         approximate minimizer.
         If False, only the approximate minimizer is returned.

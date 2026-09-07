@@ -41,17 +41,17 @@ def optimize_minibatch_sgd(
     gradient_fn : callable
         Gradient of the objective function (gradient of the loss function)
 
-    loss_fn : callable, optional
+    loss_fn : callable, default=None
         Objective loss function.
         If given, return the whole loss history
     
-    learning_rate : float, optional
+    learning_rate : float, default=0.01
         Step size used for each parameter update.
 
-    epochs : int, optional
+    epochs : int, default=100
         Number of complete passes through the training dataset.
 
-    batch_size : int, optional
+    batch_size : int, default=32
         Number of samples used to compute each gradient update.
         If batch_size=1, the method corresponds to stochastic
         gradient descent. 

@@ -29,14 +29,13 @@ def optimize_bfgs(f, grad_f, x0, H0=None, tol=1e-5, max_it=100):
     x0 : array_like
         Starting point.
 
-    H0 : ndarray, optional
+    H0 : ndarray, default=identity matrix
         Initial inverse Hessian approximation.
-        If None, the identity matrix is used.
 
-    tol : float, optional
+    tol : float, default=1e-5
         Convergence tolerance.
 
-    max_it : int, optional
+    max_it : int, default=100
         Maximum number of iterations.
 
 

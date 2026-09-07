@@ -12,7 +12,7 @@ import numpy as np
 import pytest
 import torch
 
-from machine_learning.linear_regression_pytorch import LinearRegression
+from machine_learning.linear_regression_algorithms import LinearRegressionPytorch
 
 
 class TestLinearRegression:
@@ -25,7 +25,7 @@ class TestLinearRegression:
         The model is defined as y_hat = 2x + 1.
         The input data is x = (1, 2, 3).
         """
-        model = LinearRegression(num_features=1)
+        model = LinearRegressionPytorch(num_features=1)
 
         with torch.no_grad():
             model.linear.weight.fill_(2.0)
@@ -55,7 +55,7 @@ class TestLinearRegression:
         The weight is w = 3
         The bias is b = 2.
         """
-        model = LinearRegression(
+        model = LinearRegressionPytorch(
             num_features=1,
             learning_rate=0.01
         )
@@ -93,7 +93,7 @@ class TestLinearRegression:
         The weights are w = (2, -3)
         The bias is b = 5.
         """
-        model = LinearRegression(
+        model = LinearRegressionPytorch(
             num_features=2,
             learning_rate=0.01
         )
@@ -140,7 +140,7 @@ class TestLinearRegression:
         """
         The method fit should store the optimizer's loss history.
         """
-        model = LinearRegression(num_features=1)
+        model = LinearRegressionPytorch(num_features=1)
 
         x = torch.tensor([
             [1.0],
@@ -165,7 +165,7 @@ class TestLinearRegression:
         """
         The method fit should reject one dimensional x.
         """
-        model = LinearRegression(num_features=1)
+        model = LinearRegressionPytorch(num_features=1)
 
         x = torch.tensor([1.0, 2.0, 3.0])
         y = torch.tensor([2.0, 4.0, 6.0])

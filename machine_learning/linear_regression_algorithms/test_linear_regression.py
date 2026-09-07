@@ -11,7 +11,7 @@ Date: 2026
 import numpy as np
 import pytest
 
-from machine_learning.linear_regression import LinearRegression
+from machine_learning.linear_regression_algorithms import LinearRegression
 from mathematical_optimization import optimize_minibatch_sgd
 
 

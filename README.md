@@ -1,31 +1,33 @@
 # Portfolio
 A portfolio of projects involving Python, SQL, optimization methods and machine learning.
 
-## Project Structure
+This portfolio is currently being developed and updated.
+Some files are complete and fully functional, while others are still in progress.
 
-```text
-portfolio/
-│
-├── optimization/
-│   ├── bfgs/
-│   │   ├── bfgs_algorithm.py
-│   │   └── test_bfgs.py
-│   │
-│   ├── lbfgs/
-│   │   ├── l_bfgs_algorithm.py
-│   │   └── test_l_bfgs.py
-│   │
-│   └── sgd/
-│       ├── minibatch_sgd_algorithm.py
-│       └── test_minibatch_sgd.py
-│
-├── machine_learning/
-│   └── linear_regression.py
-│
-└── sql/
+## Repository Structure
+
+- `mathematical_optimization/` — Optimization algorithm implementations and tests
+- `machine_learning/` — Machine learning algorithms and implementations
+- `sql/` — SQL exercises
+- `projects/` — End-to-end projects combining the above techniques with realistic case studies
+
+## Technologies
+
+* Python
+* SQL
+* NumPy
+* pytest
+* PyTorch
+
+## Testing
+
+Tests are written using `pytest`.
+
+Run the tests from the repository root:
+
+```bash
+pytest
 ```
-
-Each Python package contains an __init__.py file where appropriate.
 
 ## References
 
@@ -38,3 +40,11 @@ Each Python package contains an __init__.py file where appropriate.
   https://sebastianraschka.com/faq/docs/sgd-methods.html
 
 - Zhang, A., & Lipton, Z. C., & Li M. and Smola A. J. (2023) *Dive into Deep Learning*. Cambridge University Press. https://D2L.ai
+
+### Data Sources
+
+* Anonymous contributor (2020). *Seoul Bike Sharing Demand*. UCI Machine Learning Repository.
+  https://archive.ics.uci.edu/dataset/560/seoul+bike+sharing+demand
+
+* Salam, A., & El Hibaoui, A. (2018). *Comparison of Machine Learning Algorithms for the Power Consumption Prediction: Case Study of Tetouan city*. UCI Machine Learning Repository.
+  https://archive.ics.uci.edu/dataset/849/power+consumption+of+tetouan+city
