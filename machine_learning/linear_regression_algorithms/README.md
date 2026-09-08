@@ -23,6 +23,7 @@ where:
 * $y_i \in \mathbb{R}$ is the target value for observation $i$.
 
 The input data are collected into a feature matrix:
+
 $$
 X =
 \begin{bmatrix}
@@ -31,7 +32,8 @@ x_{21} & x_{22} & \cdots & x_{2d}\\
 \vdots & \vdots & \ddots & \vdots\\
 x_{n1} & x_{n2} & \cdots & x_{nd}
 \end{bmatrix}
-\in \mathbb{R}^{n\times d}.
+\in
+\mathbb{R}^{n\times d}.
 $$
 
 The targed values are collected into a vector:
@@ -78,12 +80,9 @@ $$
 $$
 
 The model is trained by minimizing the Mean Squared Error:
+
 $$
-L(w,b)
-=
-\frac{1}{n}
-\sum_{i=1}^{n}
-(\hat{y}_i-y_i)^2.
+L(w,b)=\frac{1}{n}\sum_{i=1}^{n}(\hat{y}_i-y_i)^2.
 $$
 
 For the NumPy implementation the gradients with respect to the weights and bias are computed explicitly.
@@ -91,19 +90,13 @@ For the NumPy implementation the gradients with respect to the weights and bias 
 The gradient with respect to the weights is
 
 $$
-\nabla_w L
-=
-\frac{2}{n}X^T(Xw+b-y)
+\nabla_w L=\frac{2}{n}X^T(Xw+b-y)
 $$
 
 and the gradient with respect to the bias is
 
 $$
-\nabla_b L
-=
-\frac{2}{n}
-\sum_{i=1}^{n}
-(\hat{y}_i-y_i).
+\nabla_b L=\frac{2}{n}\sum_{i=1}^{n}(\hat{y}_i-y_i).
 $$
 
 These gradients are passed to the optimization algorithm to update the model parameters.
