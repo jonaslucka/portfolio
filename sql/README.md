@@ -10,6 +10,8 @@ The SQL used as part of larger end to end projects is kept inside the correspond
 
 The dataset is imported into PstgreSQL and stored un a table named bike_rentals.
 
+Before running the import command replace PATH_TO_SEOUL_CSV with the local path to the dataset on your computer.
+
 The setup file contains the table definiton, data import and basic verification queries.
 
 See [`01_setup.sql`](01_setup.sql)

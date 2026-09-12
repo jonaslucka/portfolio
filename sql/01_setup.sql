@@ -2,6 +2,8 @@
 Creating and testing a Database about Seoul bike sharing.
 The Dataset can be found here: https://archive.ics.uci.edu/dataset/560/seoul+bike+sharing+demand
 
+Before running the import command replace PATH_TO_SEOUL_CSV with the local path to the dataset on your computer.
+
 Author: Jonas Lucka
 Date: 2026
 */
@@ -33,7 +35,7 @@ CREATE TABLE bike_rentals (
 SET datestyle = 'DMY';
 
 --  Import the CSV data --
-\copy bike_rentals FROM 'portfolio\sql\data\SeoulBikeData.csv/SeoulBikeData.csv' WITH (FORMAT csv, HEADER true);
+\copy bike_rentals FROM 'PATH_TO_SEOUL_CSV\SeoulBikeData.csv' WITH (FORMAT csv, HEADER true);
 
 --  Verify the number of rows --
 -- Expected result: 8760 --
