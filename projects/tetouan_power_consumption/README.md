@@ -167,6 +167,124 @@ Testing:
 2017-12-30 23:50:00
 ```
 
+### Feature Standardization
+
+The input variables have different numerical scales so the features are standardized before the training.
+
+For each feature:
+
+$$x_{scaled} =\frac{x-\mu}{\sigma}$$
+
+Here $\mu$ is the mean adn $\sigma$ is the standard deviation.
+
+### Optimization
+
+The Linear Regression model is optimized using a custom implementation of Minibatch Stochastic Gradient Descent.
+
+For each epoch:
+
+1. The training data is shuffled
+2. The observations are divided into minibatches.
+3. The gradient is calculated for each minibatch.
+4. The parameters are updated.
+5. The training loss is recorded.
+
+The current experiment uses:
+
+| Parameter     | Value |
+| ------------- | ----: |
+| Learning rate | 0.001 |
+| Epochs        |   100 |
+| Batch size    |    32 |
+
+## Results
+
+### Test performance
+
+The MAE measures the average absolute difference between the predicted and actual consumption:
+
+$$MAE =\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|$$
+
+RMSE penalize larger errors more strongly than MAE:
+
+$$RMSE=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}$$
+
+$R^2$ measures the proportion of variation explained by the model relative to a mean based baseline:
+
+$$R^2 =1 -\frac{\sum(y_i-\hat{y}_i)^2}{\sum(y_i-\bar{y})^2}$$
+
+The model achieved the following performance:
+
+| Metric |       Result |
+| ------ | -----------: |
+| MAE    | **3,259.46** |
+| RMSE   | **4,093.23** |
+| R²     |   **0.5594** |
+
+### Model Parameters
+
+Because the input feature were standardized each coefficient represents the change in predicted power consumption associated with a one standard deviation increase in that feature while the other features are held constant.
+
+| Feature                 | Coefficient |
+| ----------------------- | ----------: |
+| `hour`                  |     4921.89 |
+| `temperature`           |     2412.46 |
+| `day_of_week`           |      306.36 |
+| `humidity`              |       28.67 |
+| `wind_speed`            |      -56.88 |
+| `month`                 |     -195.20 |
+| `general_diffuse_flows` |     -201.99 |
+| `diffuse_flows`         |     -539.13 |
+
+The learned bias is:
+
+```text
+33042.6112
+```
+
+These coefficients describe the fitted statistical relationship in the model.
+They should not be interpreted ass causal effects.
+
+### Predictions
+
+The following plot compares the actual Zone 1 consumption wiht the model predictions during the test period.
+
+![Actual vs predicted power consumption](images/actual_vs_predicted.png)
+
+### Model Interpretation
+
+The linear regression model achieved an $R^2$ of 0.559 on the test set meaning that the model explains approximately $56\%$ of the variation in power consumption.
+
+The model provides a useful baseline for this dataset but the remaining unexplained variation suggests that power consumption is influenced by factors that are not fully captured by the current features or by a linear relationship.
+
+The results also provide a starting point for future experiments such as adding more informative time based features, transforming existing variables or comparing the linear mode with more flexible machine learning algorithms.
+
+## Reproducibility
+
+The project should be run from the root of the portfolio repository.
+
+First configure the PostgreSQL database and import the dataset using the SQl scripts.
+
+The PostgreSQL connection settings in the Python scripts must be configured for the local environment before running them.
+
+### Extract the data
+
+```powershell
+python -m projects.tetouan_power_consumption.03_extract_data_to_python
+```
+
+### Explore the data
+
+```powershell
+python -m projects.tetouan_power_consumption.04_data_exploration
+```
+
+### Train and evaluate the model
+
+```powershell
+python -m projects.tetouan_power_consumption.05_linear_regression
+```
+
 ## Dataset Reference
 
 * Salam, A., & El Hibaoui, A. (2018). *Comparison of Machine Learning Algorithms for the Power Consumption Prediction: Case Study of Tetouan city*. UCI Machine Learning Repository.
