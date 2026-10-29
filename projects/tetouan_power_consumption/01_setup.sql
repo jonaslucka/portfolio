@@ -2,7 +2,6 @@
 Setup file for the project Tetouan City Power Consumption
 The Dataset can be found here: https://archive.ics.uci.edu/dataset/849/power+consumption+of+tetouan+city
 
-Before running the import command replace PATH_TO_TETOUAN_CSV with the local path to the dataset on your computer.
 
 Author: Jonas Lucka
 Date: 2026
@@ -28,10 +27,8 @@ zone_3_power_consumption DECIMAL(12,4)
 -- The source CSV uses MM/DD/YYYY dates.
 SET datestyle = 'MDY';
 
--- Import the CSV file.
-\copy power_consumption
-FROM 'PATH_TO_TETOUAN_CSV\Tetuan City power consumption.csv'
-WITH (FORMAT csv,HEADER true);
+-- Import the CSV data.
+\copy power_consumption FROM 'projects/tetouan_power_consumption/data/Tetuan City power consumption.csv' WITH (FORMAT csv, HEADER true);
 
 -- Check the number of imported observations.
 SELECT COUNT(*)
@@ -49,4 +46,4 @@ ORDER BY ordinal_position;
 -- Preview the imported data.
 SELECT *
 FROM power_consumption
-LIMIT 100;
+LIMIT 10;
