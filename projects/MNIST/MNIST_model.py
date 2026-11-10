@@ -18,7 +18,6 @@ Author: Jonas Lucka
 Date: 2026
 """
 
-import numpy as np
 import torch
 import torch.nn.functional as F
 
@@ -26,10 +25,6 @@ import torch.nn.functional as F
 def init_mnist_params():
     """
     Initialize the parameters of the MNIST neural network.
-
-    The network consists of two fully connected layers:
-        - First layer: 784 input features and 128 hidden neurons.
-        - Second layer: 128 hidden neurons and 10 output neurons.
 
     Weights are initialized by using a normal distribution with a standard
     deviation of 0.01 and Biases are initialized to be zero.
@@ -63,7 +58,7 @@ def mnist_forward(params, x):
     """
     Perform the forward pass through the neural network.
 
-    The input data is passed through tow fully connected layers
+    The input data is passed through two fully connected layers
     where a ReLU activation function is applied after the first layer.
 
     The output consists of 10 logits, representing the model
@@ -118,112 +113,3 @@ def mnist_loss(params, x, y):
     logits = mnist_forward(params, x)
 
     return F.cross_entropy(logits, y)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def train_gd(params, x_train, y_train, lr=0.1, steps=200):
-    """
-    Train the neural network using stochastic gradient descent.
-
-    The training uses the complete training dataset for each update.
-    Therefore this implementation performs fullbatch a fullbatch gradient descent.
-
-    Parameters
-    ----------
-    params : dict
-        Dictionary containing the initial network weights and biases.
-
-    x_train : torch.Tensor
-        Training input data with shape (n_samples, 784).
-
-    y_train : torch.Tensor
-        Training labels with shape (n_samples,).
-
-    lr : float, default=0.1
-        Learning rate used by the SGD optimizer.
-
-    steps : int, default=200
-        Number of training iterations.
-
-    Returns
-    -------
-    A tuple containing:
-
-        params : dict
-            Updated network parameters after training.
-
-        losses : ndarray
-            Array containing the training loss recorded at each iteration.
-    """
-    losses = []
-
-    optimizer = torch.optim.SGD(params.values(), lr=lr)
-
-    for step in range(steps):
-
-        optimizer.zero_grad()
-
-        loss = mnist_loss(params, x_train, y_train)
-
-        loss.backward()
-
-        optimizer.step()
-
-        losses.append(loss.item())
-
-        if step % 50 == 0:
-            print(f"Iteration {step}, Loss: {loss.item():.4f}")
-
-    return params, np.array(losses)
-
-
-def mnist_accuracy(params, x, y):
-    """
-    Calculate the clasification accuracy of the neural network.
-
-    Parameters
-    ----------
-    params : dict
-        Dictionary containing the trained network parameters.
-
-    x : torch.Tensor
-        Input data with shape (n_samples, 784).
-
-    y : torch.Tensor
-        True integer class labels with shape (n_samples,).
-
-    Returns
-    -------
-    tuple
-        A tuple containing:
-
-        correct : int
-            Number of correctly classified samples.
-
-        accuracy : float
-            Classification accuracy between 0 and 1.
-    """
-    with torch.no_grad():
-
-        logits = mnist_forward(params, x)
-
-        predictions = torch.argmax(logits, dim=1)
-
-        correct = torch.sum(predictions == y).item()
-
-        accuracy = correct / x.shape[0]
-
-    return int(correct), float(accuracy)
